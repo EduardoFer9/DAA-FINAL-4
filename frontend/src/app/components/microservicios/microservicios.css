@@ -1,0 +1,24 @@
+.microservicios-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.micro-item {
+  cursor: pointer;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  transition: background 0.2s;
+}
+.micro-item:hover {
+  background: #e0e0e0;
+}
+.detalles {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}

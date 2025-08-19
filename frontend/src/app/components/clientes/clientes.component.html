@@ -1,0 +1,24 @@
+<h2>Gestión de Clientes</h2>
+
+<!-- Listar Clientes -->
+<button (click)="listar()">Listar Clientes</button>
+<ul>
+  <li *ngFor="let c of clientes">
+    {{ c.nombre }} - {{ c.email }}
+    <button (click)="eliminar(c.id)">Eliminar</button>
+  </li>
+</ul>
+
+<!-- Crear un nuevo cliente -->
+<h3>Crear Cliente</h3>
+<input [(ngModel)]="nuevoCliente.nombre" placeholder="Nombre">
+<input [(ngModel)]="nuevoCliente.email" placeholder="Email">
+<button (click)="crear()">Guardar</button>
+
+<!-- Buscar cliente por ID -->
+<h3>Buscar Cliente por ID</h3>
+<input [(ngModel)]="buscarId" type="number" placeholder="ID">
+<button (click)="buscar()">Buscar</button>
+<div *ngIf="resultadoBusqueda">
+  <p>Resultado: {{ resultadoBusqueda.nombre }} - {{ resultadoBusqueda.email }}</p>
+</div>

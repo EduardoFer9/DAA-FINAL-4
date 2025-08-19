@@ -1,0 +1,14 @@
+<div class="microservicios-container">
+  <h2>Microservicios</h2>
+  <ul>
+    <li *ngFor="let micro of microservicios" (click)="mostrarDetalles(micro)" class="micro-item">
+      <strong>{{ micro.nombre }}</strong>: {{ micro.descripcion }}
+    </li>
+  </ul>
+
+  <div *ngIf="seleccionado" class="detalles">
+    <h3>Detalles de {{ seleccionado?.nombre }}</h3>
+    <p>{{ seleccionado?.detalles }}</p>
+    <button (click)="seleccionado = null">Cerrar</button>
+  </div>
+</div>
