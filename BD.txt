@@ -1,0 +1,68 @@
+-- BD 1: CLIENTES
+CREATE DATABASE IF NOT EXISTS clientes_db;
+USE clientes_db;
+
+CREATE TABLE IF NOT EXISTS clientes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE
+);
+
+-- BD 2: PRODUCTOS
+CREATE DATABASE IF NOT EXISTS productos_db;
+USE productos_db;
+
+CREATE TABLE IF NOT EXISTS productos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(120) NOT NULL,
+  precio DECIMAL(10,2) NOT NULL,
+  stock INT NOT NULL DEFAULT 0
+);
+
+-- BD 3: VENTAS (2 tablas mín.)
+CREATE DATABASE IF NOT EXISTS ventas_db;
+USE ventas_db;
+
+CREATE TABLE IF NOT EXISTS ventas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cliente_id INT NOT NULL,
+  fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  total DECIMAL(10,2) NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS detalle_venta (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  venta_id INT NOT NULL,
+  producto_id INT NOT NULL,
+  cantidad INT NOT NULL,
+  precio_unitario DECIMAL(10,2) NOT NULL,
+  FOREIGN KEY (venta_id) REFERENCES ventas(id)
+);
+
+INSERT INTO clientes (nombre, email) VALUES
+('Juan Pérez', 'juan.perez@gmail.com'),
+('Ana Torres', 'ana.torres@gmail.com'),
+('Carlos Ramírez', 'carlos.ramirez@gmail.com'),
+('Lucía Gómez', 'lucia.gomez@gmail.com'),
+('Pedro Castillo', 'pedro.castillo@gmail.com');
+
+INSERT INTO productos (nombre, precio, stock) VALUES
+('Laptop Lenovo', 2500.00, 10),
+('Mouse Logitech', 50.00, 100),
+('Teclado Mecánico', 200.00, 50),
+('Monitor 24"', 800.00, 20),
+('Impresora HP', 600.00, 15);
+
+INSERT INTO ventas (cliente_id, total) VALUES
+(1, 2550.00),  -- Juan compra laptop + mouse
+(2, 200.00),   -- Ana compra teclado
+(3, 1600.00);  -- Carlos compra 2 monitores
+
+INSERT INTO detalle_venta (venta_id, producto_id, cantidad, precio_unitario) VALUES
+(1, 1, 1, 2500.00), -- Laptop
+(1, 2, 1, 50.00),   -- Mouse
+(2, 3, 1, 200.00),  -- Teclado
+(3, 4, 2, 800.00);  -- 2 Monitores
+
+
+
